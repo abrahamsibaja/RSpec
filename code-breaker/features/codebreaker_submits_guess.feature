@@ -9,7 +9,7 @@ Feature: code-breaker submits guess
   of a number in the secret code, the mark includes one - sign.
 
   Scenario Outline: submit matches
-    Given the secrect code is "<code>"
+    Given the secret code is "<code>"
     When I guess "<guess>"
     Then the mark should be "<mark>"
 
