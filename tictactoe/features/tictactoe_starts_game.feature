@@ -7,4 +7,4 @@ Feature: tictactoe starts game
   Scenario: start game
     Given I am not yet playing
     When I start a new game
-    Then I should see "Welcome to Tic-Tac-Toe"
+    Then I should see "Welcome to Tic-Tac-Toe!"
