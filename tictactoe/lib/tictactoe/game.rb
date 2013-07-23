@@ -8,6 +8,11 @@ module Tictactoe
     def start
       @output.puts 'Welcome to Tic-Tac-Toe!'
       @output.puts @board.cells.join(" ")
+      @output.puts 'Choose a position: '
+    end
+
+    def position position
+
     end
   end
 end

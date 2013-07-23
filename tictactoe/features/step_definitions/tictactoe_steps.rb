@@ -15,6 +15,9 @@ end
 Given(/^I am not yet playing$/) do
 end
 
+Given(/^I started the game$/) do
+end
+
 When(/^I start a new game$/) do
   game = Tictactoe::Game.new(output)
   game.start
@@ -26,4 +29,8 @@ end
 
 Then(/^I should see a gameboard "([^"]*)"$/) do |board|
   output.messages.should include(board)
+end
+
+Then(/^I should see a choose a position message "([^"]*)"$/) do |position_message|
+  output.messages.should include(position_message)
 end

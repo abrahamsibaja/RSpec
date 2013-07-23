@@ -20,6 +20,17 @@ module Tictactoe
 
         game.start
       end
+      it "asks for a position" do
+        output = double('output').as_null_object
+        game = Game.new(output)
+
+        output.should_receive(:puts).with("Choose a position: ")
+
+        game.start
+      end
+    end
+
+    describe "#mark" do
     end
   end
 end
