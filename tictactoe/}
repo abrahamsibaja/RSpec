@@ -7,5 +7,5 @@ Feature: tictactoe starts game
   Scenario: start game
     Given I am not yet playing
     When I start a new game
-    Then I should see a welcome message "Welcome to Tic-Tac-Toe!"
-    And I should see a gameboard "0 0 0 0 0 0 0 0 0"
+    Then I should see "Welcome to Tic-Tac-Toe!"
+    Then I should see the gameboard

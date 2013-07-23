@@ -3,8 +3,8 @@ class Output
     @messages ||= []
   end
 
-  def puts(message)
-    @messages << message
+  def puts message
+    messages << message
   end
 end
 
@@ -20,6 +20,10 @@ When(/^I start a new game$/) do
   game.start
 end
 
-Then(/^I should see "(.*?)"$/) do |message|
+Then(/^I should see a welcome message "([^"]*)"$/) do |message|
   output.messages.should include(message)
+end
+
+Then(/^I should see a gameboard "([^"]*)"$/) do |board|
+  output.messages.should include(board)
 end
