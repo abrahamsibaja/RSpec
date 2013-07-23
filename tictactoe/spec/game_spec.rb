@@ -5,9 +5,13 @@ module Tictactoe
     let(:output) {double('output').as_null_object}
     let(:game) {Game.new(output)}
 
+    def puts? message
+        output.should_receive(:puts).with(message)
+    end
+
     describe "#start" do
       it "sends a welcome message" do
-        output.should_receive(:puts).with('Welcome to Tic-Tac-Toe!')
+        puts? 'Welcome to Tic-Tac-Toe!'
         game.start
       end
 
