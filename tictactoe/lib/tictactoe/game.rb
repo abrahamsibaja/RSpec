@@ -1,11 +1,4 @@
 module Tictactoe
-  class GameBoard
-    attr_reader :cells
-    def initialize
-      @cells = Array.new(9,0)
-    end
-  end
-
   class Game
     def initialize(output)
       @output = output
