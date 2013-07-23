@@ -6,8 +6,10 @@ Feature: tictactoe mark cell
   Scenario Outline: mark a cell
     Given I started the game
     When I choose "<position>"
-    Then the board should be "<gameboard>"
+    Then the gameboard should be "<gameboard>"
 
     Scenarios: The gameboard is empty
-      | position | gameboard           |
-      | 1        | "1 0 0 0 0 0 0 0 0" |
+      | position | gameboard         |
+      | 1        | X 0 0 0 0 0 0 0 0 |
+      | 5        | 0 0 0 0 X 0 0 0 0 |
+      | 9        | 0 0 0 0 0 0 0 0 X |

@@ -12,7 +12,8 @@ module Tictactoe
     end
 
     def position position
-
+      @board.cells[position.to_i-1] = 'X'
+      @output.puts @board.cells.join(" ")
     end
   end
 end
