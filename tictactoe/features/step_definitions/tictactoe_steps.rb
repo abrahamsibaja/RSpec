@@ -27,3 +27,20 @@ end
 Then(/^I should see a gameboard "([^"]*)"$/) do |board|
   output.messages.should include(board)
 end
+
+Then(/^I should see a choose a position message "([^"]*)"$/) do |position_message|
+  output.messages.should include(position_message)
+end
+
+Given(/^I started the game$/) do
+end
+
+When(/^I choose "([^"]*)"$/) do |position|
+  game = Tictactoe::Game.new(output)
+  game.start
+  game.position(position)
+end
+
+Then(/^the gameboard should be "([^"]*)"$/) do |gameboard|
+  output.messages.should include(gameboard)
+end
