@@ -17,7 +17,8 @@ end
 
 When(/^I start a new game$/) do
   game = Tictactoe::Game.new(output)
-  game.start
+  game.welcome_message
+  game.game_intro
 end
 
 Then(/^I should see a welcome message "([^"]*)"$/) do |message|
@@ -37,10 +38,22 @@ end
 
 When(/^I choose "([^"]*)"$/) do |position|
   game = Tictactoe::Game.new(output)
-  game.start
   game.position(position)
 end
 
 Then(/^the gameboard should be "([^"]*)"$/) do |gameboard|
   output.messages.should include(gameboard)
+end
+
+Given(/^I have three marks in a row, column or diagonal$/) do
+end
+
+When(/^the gameboard is "([^"]*)"$/) do |gameboard|
+  game = Tictactoe::Game.new(output)
+  (0..8).each {|i| game.board.cells[i] = gameboard[i]}
+  game.verify_victory
+end
+
+Then(/^I should see a congrats message "([^"]*)"$/) do |congrats_message|
+  output.messages.should include(congrats_message)
 end
