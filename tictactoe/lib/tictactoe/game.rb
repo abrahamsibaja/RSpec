@@ -1,13 +1,13 @@
 module Tictactoe
-
   class Game
     attr_reader :board
+    attr_reader :display
     def initialize(output)
       @player_1 = Player.new('X')
       @player_2 = Player.new('Y')
       @current_player = @player_1
-      @output = output
       @board = GameBoard.new
+      @display = Display.new(output, @board)
       @win_posibilities = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     end
 
@@ -17,38 +17,39 @@ module Tictactoe
     end
 
     def welcome_message
-      @output.puts 'Welcome to Tic-Tac-Toe!'
-      @output.puts @board.cells.join(" ")
+      @display.welcome_message
+      @display.game_instructions
+      @display.gameboard
     end
 
     def game_cicle
       (1..9).each do
-        game_intro
-        position = gets
-        position(position)
+        make_movement
         verify_victory
         break unless @winner.nil?
         change_player
       end
-      @output.puts "Tied Game !!" if @winner.nil?
+      @display.tied_game_message
     end
 
-    def game_intro
-      @output.puts 'Choose a position: '
+    def make_movement
+      @display.position_message
+      position = gets
+      position(position)
+      @display.gameboard
+    end
+
+    def position position
+      @board.cells[position.to_i-1] = @current_player.symbol_mark
     end
 
     def verify_victory 
       @win_posibilities.each do |posibility| 
         if @board.cells.values_at(*posibility).all? {|cell| cell == @current_player.symbol_mark} 
           @winner = @current_player.symbol_mark
-          @output.puts "Congratulations Player #{@winner} you are the winner!!"
+          @display.winner_message(@winner)
         end
       end
-    end
-
-    def position position
-      @board.cells[position.to_i-1] = @current_player.symbol_mark
-      @output.puts @board.cells.join(" ")
     end
 
     def change_player
