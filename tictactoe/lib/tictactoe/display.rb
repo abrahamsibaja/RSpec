@@ -17,7 +17,7 @@ module Tictactoe
     end
 
     def print_gameboard gameboard, rows_number, cells_x_row
-      board = gameboard
+      board = gameboard.dup
       board.reverse!
       (1..rows_number).each {@output.puts(board.pop(cells_x_row).reverse!.join" ")}
     end
