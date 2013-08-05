@@ -16,33 +16,74 @@ Given(/^I am not yet playing$/) do
 end
 
 When(/^I start a new game$/) do
-  game = Tictactoe::Game.new(output)
-  game.welcome_message
-  game.game_intro
+  gameboard = GameBoard.new
+  display = Tictactoe::Display.new(output, gameboard)
+  display.welcome_message
+  display.game_instructions
+  display.gameboard
+  display.position_message
 end
 
 Then(/^I should see a welcome message "([^"]*)"$/) do |message|
   output.messages.should include(message)
 end
 
-Then(/^I should see a gameboard "([^"]*)"$/) do |board|
-  output.messages.should include(board)
+Then(/^I should see the game instructions "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see instructions gameboard line 1 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see instructions gameboard line 2 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see instructions gameboard line 3 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see the gameboard current state message "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see gameboard line 1 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see gameboard line 2 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
+end
+
+Then(/^I should see gameboard line 3 "([^"]*)"$/) do |message|
+  output.messages.should include(message)
 end
 
 Then(/^I should see a choose a position message "([^"]*)"$/) do |position_message|
   output.messages.should include(position_message)
 end
 
+# mark a cell
 Given(/^I started the game$/) do
 end
 
 When(/^I choose "([^"]*)"$/) do |position|
   game = Tictactoe::Game.new(output)
   game.position(position)
+  game.display.gameboard
 end
 
-Then(/^the gameboard should be "([^"]*)"$/) do |gameboard|
-  output.messages.should include(gameboard)
+Then(/^the gameboard line1 should be "([^"]*)"$/) do |gameboard1|
+  output.messages.should include(gameboard1)
+end
+
+Then(/^the gameboard line2 should be "([^"]*)"$/) do |gameboard2|
+  output.messages.should include(gameboard2)
+end
+
+Then(/^the gameboard line3 should be "([^"]*)"$/) do |gameboard3|
+  output.messages.should include(gameboard3)
 end
 
 Given(/^I have three marks in a row, column or diagonal$/) do
