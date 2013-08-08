@@ -4,13 +4,21 @@ require 'spec_helper'
 module Tictactoe
   describe Display do
     let(:output) {double('output').as_null_object}
-    let(:display) {Display.new(output, GameBoard.new)}
+    let(:display) {Display.new(output)}
 
     def puts? message
       output.should_receive(:puts).with(message)
     end
 
-    describe "#start" do
+    def fill_board positions
+      (0..positions.length-1).each do |i|
+        game.position_to_mark(positions[i].to_i)
+        game.change_player
+      end
+      game.display.print_gameboard game.board
+    end
+
+    describe "#game_intro" do
       it "sends a welcome message" do
         puts? 'Welcome to Tic-Tac-Toe!'
         display.welcome_message
@@ -26,7 +34,7 @@ module Tictactoe
         output.should_receive(:puts).with("0 0 0")
         output.should_receive(:puts).with("0 0 0")
         output.should_receive(:puts).with("0 0 0")
-        display.print_gameboard display.board
+        display.print_gameboard display.game.board
       end
     end
 

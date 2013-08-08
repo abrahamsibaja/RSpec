@@ -16,11 +16,10 @@ Given(/^I am not yet playing$/) do
 end
 
 When(/^I start a new game$/) do
-  gameboard = GameBoard.new
-  display = Tictactoe::Display.new(output, gameboard)
+  display = Tictactoe::Display.new(output)
   display.welcome_message
   display.game_instructions
-  display.print_gameboard gameboard
+  display.print_gameboard display.game.board
   display.position_message
 end
 
@@ -69,9 +68,9 @@ Given(/^I started the game$/) do
 end
 
 When(/^I choose "([^"]*)"$/) do |position|
-  game = Tictactoe::Game.new(output)
-  game.position_to_mark(position)
-  game.display.print_gameboard game.board
+  display = Tictactoe::Display.new(output)
+  display.game.position_to_mark(position)
+  display.print_gameboard display.game.board
 end
 
 Then(/^the gameboard line1 should be "([^"]*)"$/) do |gameboard1|
@@ -90,9 +89,10 @@ Given(/^I have three marks in a row, column or diagonal$/) do
 end
 
 When(/^the gameboard is "([^"]*)"$/) do |gameboard|
-  game = Tictactoe::Game.new(output)
-  (0..8).each {|i| game.board.cells[i] = gameboard[i]}
-  game.verify_victory
+  display = Tictactoe::Display.new(output)
+  (0..8).each {|i| display.game.board.cells[i] = gameboard[i]}
+  display.game.verify_victory
+  display.winner_message(display.game.winner)
 end
 
 Then(/^I should see a congrats message "([^"]*)"$/) do |congrats_message|

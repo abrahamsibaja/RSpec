@@ -1,15 +1,32 @@
 module Tictactoe
   class Display
-    attr_reader :board
-    def initialize(output, gameboard)
+    attr_reader :game
+    def initialize(output)
       @output = output
-      @board = gameboard
+      @game = Game.new
       @instructions_board = GameBoard.new
       fill_instructions_board
     end
-    
+
     def fill_instructions_board
-      (1..9).each {|i| @instructions_board.cells[i-1] = i}
+        (1..9).each {|i| @instructions_board.cells[i-1] = i}
+    end
+
+    def game_cicle
+      game_intro
+      (1..9).each do
+        make_movement
+        @game.verify_victory
+        winner_message(@game.winner) && break if @game.player_wins?
+        @game.change_player
+      end
+      tied_game_message
+    end
+
+    def game_intro
+      welcome_message
+      game_instructions
+      print_gameboard @game.board
     end
 
     def welcome_message
@@ -27,8 +44,11 @@ module Tictactoe
       (1..gameboard.number_of_rows).each {@output.puts(board.shift(gameboard.cells_x_row).join" ")}
     end
 
-    def tied_game_message
-      @output.puts "Tied Game !!" if @winner.nil?
+    def make_movement
+      position_message
+      position = gets
+      @game.position_to_mark(position)
+      print_gameboard @game.board
     end
 
     def position_message
@@ -38,5 +58,10 @@ module Tictactoe
     def winner_message(winner)
       @output.puts "Congratulations Player #{winner} you are the winner!!"
     end
+
+    def tied_game_message
+      @output.puts "Tied Game !!" if @winner.nil?
+    end
+
   end
 end
