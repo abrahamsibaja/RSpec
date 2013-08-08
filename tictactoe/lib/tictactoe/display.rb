@@ -14,19 +14,18 @@ module Tictactoe
 
     def game_cicle
       game_intro
-      (1..9).each do
+      until @game.game_over? do
         make_movement
         @game.verify_victory
-        winner_message(@game.winner) && break if @game.player_wins?
         @game.change_player
       end
-      tied_game_message
+      match_results
     end
 
     def game_intro
       welcome_message
       game_instructions
-      print_gameboard @game.board
+      print_gameboard(@game.board)
     end
 
     def welcome_message
@@ -39,16 +38,24 @@ module Tictactoe
       @output.puts 'The current state of the gameboard is:'
     end
 
-    def print_gameboard gameboard
+    def print_gameboard(gameboard)
       board = gameboard.cells.dup
       (1..gameboard.number_of_rows).each {@output.puts(board.shift(gameboard.cells_x_row).join" ")}
     end
 
     def make_movement
       position_message
-      position = gets
+      position = gets.to_i
+      valid_position?(position)
+      print_gameboard(@game.board)
+    end
+
+    def valid_position?(position)
+      until position > 0 && position < 10 do
+        puts "Choose a valid position (1 - 9):"
+        position = gets.to_i
+      end
       @game.position_to_mark(position)
-      print_gameboard @game.board
     end
 
     def position_message
@@ -63,5 +70,10 @@ module Tictactoe
       @output.puts "Tied Game !!" if @winner.nil?
     end
 
+    def match_results
+      result = tied_game_message if @game.gameboard_full?
+      result = winner_message(@game.winner) if @game.player_wins?
+      return result
+    end
   end
 end

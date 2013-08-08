@@ -27,5 +27,13 @@ module Tictactoe
     def change_player
       @current_player = @current_player== "player_2" ? "player_1":"player_2"
     end
+
+    def game_over?
+      gameboard_full? || player_wins?
+    end
+
+    def gameboard_full?
+      !@board.cells.include?(-1)
+    end
   end
 end
