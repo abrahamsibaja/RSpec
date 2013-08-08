@@ -12,10 +12,10 @@ module Tictactoe
 
     def fill_board positions
       (0..positions.length-1).each do |i|
-        game.position(positions[i].to_i)
+        game.position_to_mark(positions[i].to_i)
         game.change_player
       end
-      game.display.gameboard
+      game.display.print_gameboard game.board
     end
 
     describe "#mark a position" do

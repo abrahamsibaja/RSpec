@@ -26,7 +26,7 @@ module Tictactoe
         output.should_receive(:puts).with("0 0 0")
         output.should_receive(:puts).with("0 0 0")
         output.should_receive(:puts).with("0 0 0")
-        display.gameboard
+        display.print_gameboard display.board
       end
     end
 
