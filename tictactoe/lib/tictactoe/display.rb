@@ -51,7 +51,7 @@ module Tictactoe
     end
 
     def valid_position?(position)
-      until position > 0 && position < 10 do
+      until @game.valid?(position) do
         puts "Choose a valid position (1 - 9):"
         position = gets.to_i
       end

@@ -33,7 +33,19 @@ module Tictactoe
     end
 
     def gameboard_full?
-      !@board.cells.include?(-1)
+      !@board.cells.include?(0)
+    end
+
+    def valid? position
+      in_range?(position) && available?(position)
+    end
+
+    def in_range?(position)
+      position > 0 && position < 10
+    end
+
+    def available?(position)
+      @board.cells[position-1] == 0
     end
   end
 end
