@@ -11,4 +11,9 @@ class GameBoard
   def cells_x_row
     3
   end
+
+  def position_to_mark(position, mark)
+    @cells[position.to_i-1] = mark
+  end
+
 end

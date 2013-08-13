@@ -7,12 +7,12 @@ module Tictactoe
     describe "#mark a position" do
       context "when the gameboard is empty" do
         it "marks position: 1" do
-          position_to_mark(1)
-          expect(cells.join(" ")).to eq("X 0 0 0 0 0 0 0 0")
+          gameboard.position_to_mark(1, 'X')
+          expect(gameboard.cells.join(" ")).to eq("X 0 0 0 0 0 0 0 0")
         end
         it "marks position: 2" do
-          position_to_mark(2)
-          expect(cells.join(" ")).to eq("0 X 0 0 0 0 0 0 0")
+          gameboard.position_to_mark(2, 'X')
+          expect(gameboard.cells.join(" ")).to eq("0 X 0 0 0 0 0 0 0")
         end
       end
     end

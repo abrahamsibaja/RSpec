@@ -55,7 +55,8 @@ module Tictactoe
         puts "Choose a valid position (1 - 9):"
         position = gets.to_i
       end
-      @game.position_to_mark(position)
+      playerMark = @game.player_marks[@game.current_player]
+      @game.position_to_mark(position, playerMark)
     end
 
     def position_message

@@ -12,14 +12,5 @@ module Tictactoe
       end
     end
 
-    describe "#verify_victory" do
-      context "when Player 1 wins" do
-        it "sets winner: X" do
-          fill_board("15293")
-          game.verify_victory
-          #expect(game.winner).to eq('X')
-        end
-      end
-    end
   end
 end
