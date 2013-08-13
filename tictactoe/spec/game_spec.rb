@@ -12,18 +12,6 @@ module Tictactoe
       end
     end
 
-    describe "#mark a positio" do
-      context "when the gameboard is empty" do
-        it "marks position: 1" do
-          game.position_to_mark(1)
-          expect(game.board.cells.join(" ")).to eq("X 0 0 0 0 0 0 0 0")
-        end
-        it "marks position: 2" do
-          game.position_to_mark(2)
-          expect(game.board.cells.join(" ")).to eq("0 X 0 0 0 0 0 0 0")
-        end
-      end
-    end
     describe "#verify_victory" do
       context "when Player 1 wins" do
         it "sets winner: X" do
