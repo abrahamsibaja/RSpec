@@ -1,4 +1,3 @@
-system('clear')
 require 'spec_helper'
 
 module Tictactoe

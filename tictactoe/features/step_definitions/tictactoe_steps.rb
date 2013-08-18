@@ -17,9 +17,10 @@ end
 
 When(/^I start a new game$/) do
   display = Tictactoe::Display.new(output)
+  gameboard = Tictactoe::GameBoard.new
   display.welcome_message
   display.game_instructions
-  display.print_gameboard display.game.board
+  display.print_gameboard gameboard
   display.position_message
 end
 
@@ -69,8 +70,9 @@ end
 
 When(/^I choose "([^"]*)"$/) do |position|
   display = Tictactoe::Display.new(output)
-  display.game.position_to_mark(position)
-  display.print_gameboard display.game.board
+  gameboard = Tictactoe::GameBoard.new
+  gameboard.position_to_mark(position,'X')
+  display.print_gameboard gameboard
 end
 
 Then(/^the gameboard line1 should be "([^"]*)"$/) do |gameboard1|
