@@ -1,9 +1,10 @@
 module Tictactoe
   class Display
-    attr_reader :game
+    attr_reader :game, :gameboard
     def initialize(output)
       @output = output
       @game = Game.new
+      @gameboard = @game.gameboard
       @instructions_board = GameBoard.new
       fill_instructions_board
     end
@@ -25,7 +26,7 @@ module Tictactoe
     def game_intro
       welcome_message
       game_instructions
-      print_gameboard(@game.board)
+      print_gameboard(@gameboard)
     end
 
     def welcome_message
@@ -34,7 +35,7 @@ module Tictactoe
 
     def game_instructions
       @output.puts 'Every turn you play, you must choose a position number from the gameboard:'
-      print_gameboard @instructions_board
+      print_gameboard(@instructions_board)
       @output.puts 'The current state of the gameboard is:'
     end
 
@@ -46,17 +47,17 @@ module Tictactoe
     def make_movement
       position_message
       position = gets.to_i
-      valid_position?(position)
-      print_gameboard(@game.board)
+      validate_position(position)
+      print_gameboard(@gameboard)
     end
 
-    def valid_position?(position)
-      until @game.valid?(position) do
+    def validate_position(position)
+      until @gameboard.valid_position?(position) do
         puts "Choose a valid position (1 - 9):"
         position = gets.to_i
       end
       playerMark = @game.player_marks[@game.current_player]
-      @game.position_to_mark(position, playerMark)
+      @gameboard.position_to_mark(position, playerMark)
     end
 
     def position_message
@@ -72,7 +73,7 @@ module Tictactoe
     end
 
     def match_results
-      result = tied_game_message if @game.gameboard_full?
+      result = tied_game_message if @gameboard.full?
       result = winner_message(@game.winner) if @game.player_wins?
       return result
     end

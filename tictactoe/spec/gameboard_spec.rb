@@ -27,23 +27,26 @@ module Tictactoe
       context "when the gameboard is full" do
         it "verifies if the gameboard is full" do
           fill_board('123456789')
-          expect(gameboard.gameboard_full?).to be_true
+          expect(gameboard.full?).to be_true
         end
       end
       context "when the gameboard is not full" do
         it "verifies if the gameboard is full" do
           fill_board('1')
-          expect(gameboard.gameboard_full?).to be_false
+          expect(gameboard.full?).to be_false
         end
       end
     end
 
-    describe "#available?" do
-      it "verifies if the position is available" do
+    describe "#valid_position?" do
+      it "verifies if the position is valid to play" do
         fill_board('12346789')
-        expect(gameboard.available?(5)).to be_true
+        expect(gameboard.valid_position?(5)).to be_true
+        expect(gameboard.valid_position?(69)).to be_false
+        expect(gameboard.valid_position?(-1)).to be_false
+        expect(gameboard.valid_position?(0)).to be_false
+        expect(gameboard.valid_position?(10)).to be_false
       end
     end
-
   end
 end
