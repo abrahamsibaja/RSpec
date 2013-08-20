@@ -1,0 +1,37 @@
+
+Tictactoe::Display
+  #game_intro
+    sends a welcome message
+    sends the game instructions
+    sends the gameboard (FAILED - 1)
+  #make movement
+    asks for a position
+
+Tictactoe::GameBoard
+  #mark a position
+    when the gameboard is empty
+      marks position: 1
+      marks position: 2
+  #gameboard full?
+    when the gameboard is full
+      verifies if the gameboard is full
+    when the gameboard is not full
+      verifies if the gameboard is full
+  #available_position?
+    verifies if the position is available to play
+
+Failures:
+
+  1) Tictactoe::Display#game_intro sends the gameboard
+     Failure/Error: display.print_gameboard display.gameboard
+     NoMethodError:
+       undefined method `cells' for nil:NilClass
+     # ./lib/tictactoe/display.rb:42:in `print_gameboard'
+     # ./spec/display_spec.rb:36:in `block (3 levels) in <module:Tictactoe>'
+
+Finished in 0.01333 seconds
+9 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/display_spec.rb:32 # Tictactoe::Display#game_intro sends the gameboard
