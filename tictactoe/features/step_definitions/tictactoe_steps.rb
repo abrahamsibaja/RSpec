@@ -1,3 +1,4 @@
+system('clear')
 class Output
   def messages
     @messages ||= []
@@ -70,7 +71,7 @@ end
 When(/^I choose "([^"]*)"$/) do |position|
   display = Tictactoe::Display.new(output)
   display.gameboard.position_to_mark(position,'X')
-  display.print_gameboard gameboard
+  display.print_gameboard display.gameboard
 end
 
 Then(/^the gameboard line1 should be "([^"]*)"$/) do |gameboard1|

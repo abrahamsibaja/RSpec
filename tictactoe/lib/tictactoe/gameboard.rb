@@ -28,7 +28,7 @@ module Tictactoe
 private
 
     def in_range?(position)
-      position > 0 && position < 10
+      position.between?(1,9)
     end
 
     def available_position?(position)

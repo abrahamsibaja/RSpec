@@ -24,8 +24,6 @@ module Tictactoe
       @current_player = @current_player== "player_2" ? "player_1":"player_2"
     end
 
-private
-
     def player_wins?
       !@winner.nil?
     end
